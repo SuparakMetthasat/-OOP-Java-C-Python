@@ -60,6 +60,8 @@ public class Main {
         an.sound();
         d.sound();
         c.sound();
+
+        System.gc();
     }
 }
 
@@ -74,3 +76,10 @@ Output:
         cat meows
         dog barks
         cat meows
+        delete animal
+
+การเรียกใช้ finalize():
+GC จะทำการเรียก finalize() ของ object ที่กำลังถูกเก็บ (collect) เท่านั้น 
+ซึ่งการทำงานนี้ไม่ได้ถูกการันตีว่าจะเกิดขึ้นทันทีหลังจาก System.gc() ถูกเรียก
+ในกรณีนี้, GC อาจเก็บแค่บาง object: Animal เพราะ object อื่น ๆ (Dog และ Cat) 
+อาจจะยังไม่ได้ถูกเก็บในหน่วยความจำ จึงไม่ได้เรียก finalize() ของ Dog และ Cat
